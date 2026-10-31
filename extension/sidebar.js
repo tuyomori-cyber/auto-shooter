@@ -1,11 +1,8 @@
 const canvas = document.querySelector('#field');
 const ctx = canvas.getContext('2d');
 const gameView = document.querySelector('#game');
-const restore = document.querySelector('#restore');
-const start = document.querySelector('#start');
 function send(type, extra = {}) { return browser.runtime.sendMessage({ type, ...extra }); }
-document.querySelector('#minimize').addEventListener('click', () => send('minimize'));
-restore.addEventListener('click', () => send('restore'));
+document.querySelector('#close').addEventListener('click', () => browser.sidebarAction.close());
 function move(event) {
   const rect = canvas.getBoundingClientRect();
   send('move', { x: (event.clientX - rect.left) / rect.width });
@@ -29,10 +26,8 @@ function draw(g) {
 async function refresh() {
   try {
     const g = await send('state');
-    gameView.hidden = !g.running || g.minimized;
-    restore.hidden = !g.running || !g.minimized;
-    start.hidden = g.running;
-    if (g.running && !g.minimized) {
+    gameView.hidden = !g.running;
+    if (g.running) {
       document.querySelector('#score').textContent = `撃破 ${g.score}　WAVE ${g.wave}`;
       document.querySelector('#hp').textContent = g.respawn > 0 ? '復帰中…' : `HP ${g.hp}`;
       draw(g);
@@ -40,4 +35,4 @@ async function refresh() {
   } catch (error) { console.error(error); }
   setTimeout(refresh, 100);
 }
-refresh();
+send('start').then(refresh).catch(error => console.error(error));

@@ -13,14 +13,11 @@ setInterval(() => {
 }, 50);
 
 browser.browserAction.onClicked.addListener(() => {
-  game.running = true;
-  game.minimized = false;
-  browser.sidebarAction.open().catch(console.error);
+  browser.sidebarAction.toggle().catch(error => console.error('サイドバーを切り替えられませんでした', error));
 });
 browser.runtime.onMessage.addListener(message => {
-  if (message.type === "state") return Promise.resolve(game);
-  if (message.type === "move" && Number.isFinite(message.x)) game.x = Math.max(0.04, Math.min(0.96, message.x));
-  if (message.type === "minimize") game.minimized = true;
-  if (message.type === "restore") { game.running = true; game.minimized = false; }
+  if (message.type === 'start') game.running = true;
+  if (message.type === 'state') return Promise.resolve(game);
+  if (message.type === 'move' && Number.isFinite(message.x)) game.x = Math.max(0.04, Math.min(0.96, message.x));
   return Promise.resolve();
 });

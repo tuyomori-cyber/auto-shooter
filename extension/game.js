@@ -1,7 +1,7 @@
 /* The simulation belongs to the background page, independently of the sidebar. */
 (function (root) {
   function createGame() {
-    return { running: false, minimized: false, score: 0, hp: 3, x: 0.5, enemies: [], shots: [], enemyShots: [], time: 0, fire: 0, enemyFire: 0, wave: 0, respawn: 0 };
+    return { running: false, score: 0, hp: 3, x: 0.5, enemies: [], shots: [], enemyShots: [], time: 0, fire: 0, enemyFire: 0, wave: 0, respawn: 0 };
   }
   function step(g, dt) {
     if (!g.running) return;
