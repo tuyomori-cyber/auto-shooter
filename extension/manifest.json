@@ -1,0 +1,10 @@
+{
+  "manifest_version": 2,
+  "name": "Auto Shooter",
+  "version": "0.1.0",
+  "description": "タブを切り替えても遊べる小さなシューティングゲーム",
+  "browser_action": { "default_title": "Auto Shooter を起動・表示" },
+  "sidebar_action": { "default_title": "Auto Shooter", "default_panel": "sidebar.html", "open_at_install": false },
+  "background": { "scripts": ["game.js", "background.js"], "persistent": true },
+  "browser_specific_settings": { "gecko": { "id": "auto-shooter@example.local", "strict_min_version": "109.0" } }
+}

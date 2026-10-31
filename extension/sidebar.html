@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="sidebar.css"><title>Auto Shooter</title></head>
+<body>
+  <main>
+    <section id="game" hidden>
+      <header><strong>AUTO SHOOTER</strong><button id="minimize" aria-label="ゲームを最小化">−</button></header>
+      <div class="stats"><span id="score">撃破 0</span><span id="hp">HP 3</span></div>
+      <canvas id="field" width="300" height="400" aria-label="戦闘画面。左右にドラッグして移動"></canvas>
+      <p>戦闘画面を左右にドラッグして移動</p>
+    </section>
+    <button id="restore" hidden>▶ ゲームに戻る</button>
+    <p id="start" hidden>拡張ボタンを押してゲームを起動してください。</p>
+  </main>
+  <script src="sidebar.js"></script>
+</body></html>
